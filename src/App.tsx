@@ -14,6 +14,7 @@ function App() {
   const touchStartX = useRef<number | null>(null);
 
   const activeItem = timeline[activeIndex];
+  const mediaBase = `${import.meta.env.BASE_URL}media/`;
   const isLastSlide = activeIndex === timeline.length - 1;
   const isActiveLoaded = loadedMedia[activeItem.filename];
   const celebrationDecor = useMemo(() => Array.from({ length: 18 }, (_, i) => i), []);
@@ -76,19 +77,21 @@ function App() {
             {!isActiveLoaded && <div className={styles.skeleton} aria-hidden="true" />}
             {activeItem.type === "photo" ? (
               <img
-                src={`/media/${activeItem.filename}`}
+                src={`${mediaBase}${activeItem.filename}`}
                 alt={normalizeAlt(activeItem.filename)}
                 loading="lazy"
                 onLoad={() => setLoadedMedia((prev) => ({ ...prev, [activeItem.filename]: true }))}
+                onError={() => setLoadedMedia((prev) => ({ ...prev, [activeItem.filename]: true }))}
                 className={isActiveLoaded ? styles.mediaVisible : styles.mediaHidden}
               />
             ) : (
               <video
-                src={`/media/${activeItem.filename}`}
+                src={`${mediaBase}${activeItem.filename}`}
                 controls
                 playsInline
                 preload="metadata"
                 onLoadedData={() => setLoadedMedia((prev) => ({ ...prev, [activeItem.filename]: true }))}
+                onError={() => setLoadedMedia((prev) => ({ ...prev, [activeItem.filename]: true }))}
                 className={isActiveLoaded ? styles.mediaVisible : styles.mediaHidden}
               />
             )}

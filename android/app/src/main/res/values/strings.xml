@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Valentine Story</string>
+    <string name="title_activity_main">Valentine Story</string>
+    <string name="package_name">com.hadd4way.valentines</string>
+    <string name="custom_url_scheme">com.hadd4way.valentines</string>
+</resources>
